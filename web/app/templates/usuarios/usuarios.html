@@ -1,0 +1,81 @@
+{% extends 'app/mantenedor.html' %}
+{%load static%}
+{%block mantenedor%}
+
+<div class="d-grid gap-2 d-md-block">
+    <a href="{%url 'registro' %}" class="btn btn-primary" type="button">Agregar usuario</a>&nbsp;&nbsp;
+    <a href="{%url 'adminAdd'%}" class="btn btn-warning" type="button">Agregar administrador</a>
+</div>
+<hr>
+<div class="card shadow">
+    <div class="card-body">
+        <table class="table texto-body table-borderless table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">USUARIO</th>
+                    <th scope="col">EMAIL</th>
+                    <th scope="col">NOMBRE</th>
+                    <th scope="col">APELLIDO</th>
+                    <th scope="col">RUN</th>
+                    <th scope="col">ADMIN</th>
+                    <th scope="col"></th>
+            </thead>
+            <tbody>
+                {%for x in usuarios%}
+                <tr>
+                    <td>{{x.id}}</td>
+                    <td>{{x.username}}</td>
+                    <td>{{x.email}}</td>
+                    <td>{{x.nombre}}</td>
+                    <td>{{x.apellido}}</td>
+                    <td>{{x.run}}</td>
+                    <td>
+                        {%if x.usuario_admin == True %}
+                        <img src="{% static 'app/img/ico/check_circle.svg'%}" alt="" width="24" height="24"
+                            class="d-inline-block align-text-top" style="color: azure;">
+                        {%else%}
+                        <img src="{% static 'app/img/ico/cancel_black.svg'%}" alt="" width="24" height="24"
+                            class="d-inline-block align-text-top" style="color: azure;">
+                        {%endif%}
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <a class="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{% static 'app/img/ico/edit.svg'%}" alt="" width="24" height="24"
+                                    class="d-inline-block align-text-top" style="color: azure;">
+                            </a>
+
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+
+                                <li>
+                                    <a class="dropdown-item d-flex gap-2 align-items-center"
+                                        href="{% url 'usuarios_edit'  id=x.id %}">
+                                        <svg class="bi" width="16" height="16">
+                                            <use xlink:href="#files" />
+                                        </svg>
+                                        Editar
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item dropdown-item-x d-flex gap-2 align-items-center"
+                                        href="{% url 'usuarios_eliminar'  id=x.id %}">
+                                        <svg class="bi" width="16" height="16">
+                                            <use xlink:href="#trash" />
+                                        </svg>
+                                        Eliminar
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{%endblock%}

@@ -1,0 +1,113 @@
+.body {
+    font-family: 'Cabin', sans-serif;
+    background-color: white;
+}
+
+.bg-nav {
+    background-color: rgb(255, 255, 255);
+}
+
+.btn {
+    border: none;
+    border-radius: 0;
+}
+
+.navbar-brand,
+.nav-link {
+    font-family: 'Poppins', sans-serif;
+}
+
+.nav-link:hover {
+    color: rgb(61, 61, 61);
+    text-decoration: overline rgb(204, 204, 204);
+}
+
+.btn-dark:hover {
+    background-color: rgb(51, 51, 51);
+    color: black;
+    border-color: rgb(204, 204, 204);
+}
+
+.card-text {
+    color: rgb(0, 0, 0);
+    text-align: center;
+
+}
+
+.card-text {
+    font-family: 'Poppins', sans-serif;
+
+}
+
+.card-title {
+    font-family: 'Poppins', sans-serif;
+    color: rgb(0, 0, 0);
+    text-transform: uppercase;
+    text-align: center;
+
+}
+
+.card {
+    border: 1rem;
+}
+
+.breadcrumb-item {
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+}
+
+.dropdown-item-danger {
+    color: rgba(255, 0, 0, 0.562);
+}
+
+.dropdown-item-danger:hover,
+.dropdown-item-danger:focus {
+    color: #fff;
+    background-color: rgba(255, 0, 0, 0.562);
+}
+
+.dropdown-item-danger.active {
+    background-color: rgba(255, 0, 0, 0.562);
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+.material-icons.md-18 {
+    font-size: 18px;
+}
+
+.material-icons.md-24 {
+    font-size: 24px;
+}
+
+.md-36 {
+    font-size: 36px;
+}
+
+.material-icons.md-48 {
+    font-size: 48px;
+}

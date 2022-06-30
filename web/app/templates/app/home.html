@@ -1,0 +1,200 @@
+{% extends 'app/base.html' %}
+
+{%load static%}
+
+{%block title%}
+<title>Home</title>
+{%endblock%}
+
+{% block content %}
+<style>
+    .fondo {
+        position: relative;
+        display: inline-block;
+        text-align: right;
+        left: 70%;
+        transform: translate(-40%, -20%);
+    }
+
+    .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+    }
+
+    @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+        }
+    }
+
+    .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+    }
+
+    .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+    }
+
+    .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+    }
+
+    .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+    }
+
+    .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+</style>
+
+<div>
+    <!--Carrusel-->
+    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
+                aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <rect width="100%" height="100%" fill="#777" />
+                </svg>
+
+                <div class="container">
+                    <div class="carousel-caption text-start">
+                        <h1>Crea tu cuenta</h1>
+                        <p>¡Crea una cuenta y obtén acceso a nuestro productos!</p>
+                        <p><a class="btn btn-lg btn-dark" href="{%url 'registro'%}">Regístrate </a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <rect width="100%" height="100%" fill="#777" />
+                </svg>
+
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h1>Visita nuestra tienda</h1>
+                        <p>¡Encontrarás miles de productos para que tu mascota destaque con un estilo único!</p>
+                        <p><a class="btn btn-lg btn-dark" href="{%url 'tienda' %}">Ir a la tienda</a></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <!--//-->
+
+
+    <!--Heading-->
+    <div class="container marketing">
+        <div class="row">
+            <div class="col-lg-4">
+                <img src="{%static 'app/img/bandana01.jpg'%}" class="rounded-circle" alt="..." height="240px"
+                    width="240px">
+
+
+                <h2 class="fw-normal">Bandanas</h2>
+                <p>Si buscas bandanas para mascotas, estas en el lugar correcto. Entra y conoce la variedad de bandanas
+                    para perros. Razas Chicas y Grandes.</p>
+
+            </div>
+            <div class="col-lg-4">
+                <img src="{%static 'app/img/4.jpg'%}" class="rounded-circle" alt="..." height="240px" width="240px">
+
+
+                <h2 class="fw-normal">Correas</h2>
+                <p>Las mejores correas para perros están en Patitas. Compra online de forma rápida y fácil. Encuentra la
+                    mayor variedad de Correas para perros en un sólo click.</p>
+
+            </div>
+            <div class="col-lg-4">
+                <img src="{%static 'app/img/5.jpg'%}" class="rounded-circle" alt="..." height="240px" width="240px">
+
+
+                <h2 class="fw-normal">Identificadores</h2>
+                <p>Incluye el nombre de tu perro o gato por delante y por detrás todos tus datos de contacto. Detalles
+                    personalizados.</p>
+
+            </div>
+
+        </div>
+
+        <!-- START THE FEATURETTES -->
+
+    </div>
+    <!--//-->
+    <div class="container px-4 py-5" id="custom-cards">
+        <h2 class="pb-2 border-bottom"></h2>
+
+        <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+            <div class="col">
+                <div class="card card-cover overflow-hidden text-white bg-dark rounded-4 shadow-lg"
+                    style="background-image: url('static/app/img/1.jpg');height: 900px;">
+                    <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                        <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Por su bienestar</h2>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card card-cover  overflow-hidden text-white bg-dark rounded-4 shadow-lg"
+                    style="background-image: url('static/app/img/2.jpg'); height: 900px;">
+                    <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                        <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Porque ellos lo merecen todo</h2>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card card-cover overflow-hidden text-white bg-dark rounded-4 shadow-lg"
+                    style="background-image: url('static/app/img/3.jpg'); height: 900px;">
+                    <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
+                        <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Un estilo único para tu mejor amigo</h2>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}

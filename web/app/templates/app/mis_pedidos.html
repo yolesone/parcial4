@@ -1,0 +1,133 @@
+{% extends 'app/base.html' %}
+
+{%load static%}
+
+{%block title%}
+<title>Mis pedidos</title>
+{%endblock%}
+
+{% block content %}
+
+
+<div class="container mt-5">
+    <div class="p-5 mb-4 bg-light rounded-3 shadow-lg">
+
+        {% if user.is_authenticated %}
+
+        <div class="row featurette">
+            <div class="order-md-2 text-center">
+                <h1 class="display-5 fw-bold">Mis pedidos</h1>
+                {%for v in venta%}
+
+                <div class="list-group m-2">
+                    <a href="{% url 'det_pedido'  pk=v.id %}" class="list-group-item list-group-item-action"
+                        aria-current="true">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Orden ID: {{v.id}}</h5>
+                            <small>Fecha de proceso: {{v.created_at}}</small>
+                        </div>
+                        <p class="mb-1 text-start">
+                            Estado del pedido: {{v.estado.estado}}
+                            {%if v.estado.estado == "Aceptada"%}
+                            <br>
+                            <div class="position-relative m-4">
+                                <div class="progress" style="height: 1px;">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 0%;"
+                                        aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <button type="button"
+                                    class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-success rounded-pill"
+                                    style="width: 3rem; height:3rem;"><span
+                                        class="material-icons">&#xe877;</span></button>
+                                <button type="button"
+                                    class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-secondary rounded-pill"
+                                    style="width: 3rem; height:3rem;"><span
+                                        class="material-icons">&#xe1a1;</span></button>
+                                <button type="button"
+                                    class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill"
+                                    style="width: 3rem; height:3rem;"><span
+                                        class="material-icons">&#xe558;</span></button>
+                            </div>
+                            {%endif%}
+                            {%if v.estado.estado == "Preparacion"%}
+                            <div class="position-relative m-4">
+                                <div class="progress" style="height: 1px;">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 50%;"
+                                        aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <button type="button"
+                                    class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-success rounded-pill"
+                                    style="width: 3rem; height:3rem;"><span
+                                        class="material-icons">&#xe877;</span></button>
+                                <button type="button"
+                                    class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-success rounded-pill"
+                                    style="width: 3rem; height:3rem;"><span
+                                        class="material-icons">&#xe1a1;</span></button>
+                                <button type="button"
+                                    class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill"
+                                    style="width: 3rem; height:3rem;"><span
+                                        class="material-icons">&#xe558;</span></button>
+                            </div>
+                            {%endif%}
+                            {%if v.estado.estado == "Despachada"%}
+                            <div class="position-relative m-4">
+                                <div class="progress" style="height: 1px;">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%; "
+                                        aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <button type="button"
+                                    class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-success rounded-pill"
+                                    style="width: 3rem; height:3rem;"><span
+                                        class="material-icons">&#xe877;</span></button>
+                                <button type="button"
+                                    class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-success rounded-pill"
+                                    style="width: 3rem; height:3rem;"><span
+                                        class="material-icons">&#xe1a1;</span></button>
+                                <button type="button"
+                                    class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-success rounded-pill"
+                                    style="width: 3rem; height:3rem;"><span
+                                        class="material-icons">&#xe558;</span></button>
+                            </div>
+                            {%endif%}
+                        </p>
+
+                    </a>
+                </div>
+                {%endfor%}
+
+
+
+
+                <br>
+                <div>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{% url 'tienda' %}" class="btn btn-secondary me-md-2" type="button">Volver a la
+                            tienda</a>
+
+                    </div>
+
+                </div>
+
+
+
+
+                {%else%}
+                <h1 class="display-5 fw-bold">Carrito no disponible</h1>
+                <p class="col-md-8 fs-4">
+                    Debes iniciar sesión para poder visualizar el carrito.
+                </p>
+
+                <a class="btn btn-dark btn-lg" aria-current="page" href="{% url 'logear' %}">Iniciar sesión
+                    &nbsp;<img src="{% static 'app/img/ico/person.svg'%}" alt="" width="24" height="24"
+                        class="d-inline-block align-text-top" style="color: azure;">
+                </a>
+
+                {%endif%}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{%endblock%}

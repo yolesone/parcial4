@@ -1,0 +1,112 @@
+{% extends 'app/base.html' %}
+
+{%load static%}
+
+{%block title%}
+<title>Carrito de compras</title>
+{%endblock%}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="p-5 mb-4 bg-light rounded-3 shadow-lg">
+
+        {% if user.is_authenticated %}
+
+        <div class="row featurette">
+            <div class="order-md-2 text-center">
+                <h1 class="display-5 fw-bold">Mi carrito de compras</h1>
+                <table class="table text-color-wh">
+
+                    <thead>
+                        <tr class="text-start">
+                            <th>Foto</th>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Subtotal</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% if request.session.carro.items %}
+
+                        {% for key, value in request.session.carro.items %}
+                        <tr class="text-start">
+                            <td><img src="{{value.imagen}}" style="height: 70px; width: 70px;"></td>
+                            <td>{{value.nombreProducto}}</td>
+                            <td>
+                                <a href="{% url 'carro:restar' value.idProducto %}"
+                                    class="btn rounded-pill btn-sm btn-success"><span
+                                        class="material-icons">&#xe15b;</span></a>
+
+                                {{value.cantidad}}
+
+                                <a href="{% url 'carro:agregar2' value.idProducto %}"
+                                    class="btn  rounded-pill btn-sm btn-success">
+                                    <span class="material-icons">&#xe145;</span>
+                                </a>
+                            </td>
+
+                            <td>
+                                ${{value.precio}}
+                            </td>
+                            <td class="">
+                                <a href="{% url 'carro:eliminar' value.idProducto %}"
+                                    class="btn btn-outline-danger"><span class="material-icons">&#xe872;</span></a>
+                            </td>
+                        </tr>
+                        {%endfor%}
+                        {%else%}
+                        <tr>
+                            <td colspan="5">
+                                <div class="alert alert-danger text-center">
+                                    Sin productos
+                                </div>
+                            </td>
+                        </tr>
+
+                        {%endif%}
+                        <tr>
+                            <th colspan="5" class="text-center">
+                                Total a pagar: ${{importe_total_carro}}
+                            </th>
+                        </tr>
+
+
+                    </tbody>
+
+
+                </table>
+
+                <div>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{% url 'tienda' %}" class="btn btn-secondary me-md-2" type="button">Volver a la
+                            tienda</a>
+                        <a href="{% url 'procesar_venta' %}" class="btn btn-dark me-md-2" type="button">Confirmar
+                            carrito</a>
+
+                    </div>
+
+                </div>
+
+
+
+
+                {%else%}
+                <h1 class="display-5 fw-bold">Carrito no disponible</h1>
+                <p class="col-md-8 fs-4">
+                    Debes iniciar sesión para poder visualizar el carrito.
+                </p>
+
+                <a class="btn btn-dark btn-lg" aria-current="page" href="{% url 'logear' %}">Iniciar sesión
+                    &nbsp;<img src="{% static 'app/img/ico/person.svg'%}" alt="" width="24" height="24"
+                        class="d-inline-block align-text-top" style="color: azure;">
+                </a>
+
+                {%endif%}
+            </div>
+        </div>
+    </div>
+
+</div>
+{%endblock%}

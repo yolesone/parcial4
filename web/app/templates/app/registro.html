@@ -1,0 +1,30 @@
+{% extends 'app/base.html' %}
+{%load static%}
+{%block title%}
+<title> Registro</title>
+{%endblock%}
+{%block content%}
+<br>
+<div class="row">
+    <div class="col-12 col-md-6 offset-md-3">
+
+        <div class="card shadow">
+            <div class="card-body">
+                <form method="post" action="">
+
+                    {% csrf_token %}
+
+                    {{form}}
+                    <br>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{%url 'home' %}" class="btn btn-secondary" type="button">Ir al home</a>
+                        <button type="submit" class="btn btn-primary">Registrate</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+{%endblock%}

@@ -1,0 +1,28 @@
+{% if accion == "form_edit" %}
+<div class="card shadow">
+    <div class="card-body">
+        <div id="cuadro3">
+            <div class="table-wrapper">
+                <div class="col-sm-12" align="right">
+                    <a class="add btn btn-success" title="Ver datos en tabla" data-toggle="tooltip"
+                        href="{% url 'usuarios' %}">
+                        Volver
+                    </a>
+                </div>
+                <h3>Datos del Usuario</h3>
+
+                <form role="form" enctype="multipart/form-data" action="" method="POST" novalidate>
+                    {% csrf_token %}
+                    <table>
+                        {{ form.as_table }}
+                        <input type="hidden" name="id_persona" value="{{form.id_persona}}">
+                    </table>
+                    <input class="btn btn-success" type="submit" value="Actualizar">
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}

@@ -1,0 +1,140 @@
+{% extends "app/base.html" %}
+
+{%load static%}
+{%block title%}
+<title>Producto: {{producto.nombreProducto}}</title>
+{%endblock%}
+
+{% block content %}
+<style>
+    .text-center {
+        font-family: 'Poppins';
+    }
+</style>
+
+<div class="container-xxl">
+    <br>
+    <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
+        aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home'%}">Home</a></li>
+            <li class="breadcrumb-item" aria-current="page"><a href="{% url 'tienda'%}">Tienda</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{producto.idProducto}}</li>
+        </ol>
+    </nav>
+    <div class="p-5 mb-4 bg-light rounded-3 shadow-lg">
+
+        {% if user.is_authenticated %}
+
+        <div class="row featurette">
+            <div class="col-md-7 order-md-2 text-center">
+                <h1 class="featurette-heading fw-normal lh-1">{{producto.nombreProducto}}</h1>
+                <p class="lead text-center"><strong>${{producto.precio}}</strong></p>
+                <p class="lead"><strong>
+                        {% if producto.activo == 1 %}
+                        <p style="color: rgb(26, 82, 35);">Disponible</p>
+                        {%else%}
+                        No disponible
+                        {% endif %}
+
+                    </strong></p>
+                <p class="lead">En stock {{producto.stock}} unidades</p>
+
+                <form action="">
+                    <div class="mx-auto col-md-3 text-center">
+                        <div class="form-floating mb-3">
+                            <input type="number" id="basket-qty2" name="stock" class="form-control" id="floatingInput"
+                                placeholder="stock" min="1" max="{{producto.stock}}" required>
+                            <label class="text-center" for="floatingInput">Cantidad</label>
+                        </div>
+                    </div>
+
+                    <p>
+
+
+                        <button type="button" id="add-button" value="{{producto.idProducto}}"
+                            class="btn btn-lg btn-primary">Añadir al
+                            carrito</button>
+
+                </form>
+
+
+                </p>
+
+            </div>
+            <div class="col-md-5 order-md-1 text-center">
+                <img src="{{producto.foto.url}}" class="img-fluid rounded-4 shadow-sm mx-auto d-block" alt="...">
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+    {%else%}
+    <h1 class="display-5 fw-bold">Producto no disponible</h1>
+    <p class="col-md-8 fs-4">
+        Debes sesión para poder visualizar el detalle del producto.
+    </p>
+
+    <a class="btn btn-dark btn-lg" aria-current="page" href="{% url 'logear' %}">Iniciar sesión
+        &nbsp;<img src="{% static 'app/img/ico/person.svg'%}" alt="" width="24" height="24"
+            class="d-inline-block align-text-top" style="color: azure;">
+    </a>
+
+
+    {%endif%}
+</div>
+
+</div>
+
+
+<script>
+
+    $(document).on('click', '#add-button', function (e) {
+        e.preventDefault();
+        var cantidad = '{{producto.stock}}'
+
+        if ($('#basket-qty2').val() > cantidad) {
+            Swal.fire(
+                '¡Stock insuficiente!',
+                'Ingrese una cantidad inferior',
+                'error'
+            );
+        }
+        else {
+            $.ajax({
+                type: 'POST',
+                url: '{% url "carro:agregar" producto.idProducto %}',
+                data: {
+                    productqty: $('#basket-qty2').val(),
+                    csrfmiddlewaretoken: "{{csrf_token}}",
+                    action: 'post'
+
+                },
+
+                success: function (json) {
+
+                    Swal.fire(
+                        'Producto agregado',
+                        '¡Su(s) producto(s) han sido añadidos al carito de compras!',
+                        'success'
+                    );
+                },
+                error: function (xhr, errmsg, err) {
+                    Swal.fire(
+                        '¡No has seleccionado la cantidad!',
+                        'Para continuar, añade una cantidad de productos.',
+                        'error'
+                    );
+                }
+            });
+        }
+    })
+</script>
+
+
+
+
+{% endblock %}

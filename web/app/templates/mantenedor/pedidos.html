@@ -1,0 +1,70 @@
+{% extends 'app/mantenedor.html' %}
+{%load static%}
+{%block mantenedor%}
+
+<div class="card shadow m-2">
+    <div class="card-body">
+        <table class="table texto-body table-borderless table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">ID Venta</th>
+                    <th scope="col">Total Productos</th>
+                    <th scope="col">Descripción Producto</th>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">Estado del Pedido</th>
+
+            </thead>
+            <tbody>
+
+                {%for x in detalleventa%}
+                <tr>
+                    <td>{{x.venta_id}}</td>
+                    <td>{{x.cantidad}}</td>
+                    <td>{{x.producto_id.nombreProducto}}</td>
+                    <td>{{x.user}}</td>
+                    <td>{{x.venta_id.estado}}</td>
+                    <td><a href="{% url 'editar_pedido' pk=x.venta_id %}" class=""><span
+                                class="material-icons">&#xe3c9;</span></a></td>
+
+
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="container">
+    {% if accion == "form_edit" %}
+    {% load crispy_forms_tags %}
+    <div class="card shadow">
+        <div class="card-body">
+            <div id="cuadro3">
+                <div class="table-wrapper">
+                    <div class="col-sm-12" align="right">
+                        <a class="add btn btn-secondary" title="Ver datos en tabla" data-toggle="tooltip"
+                            href="{% url 'pedidos' %}">
+                            Volver
+                        </a>
+                    </div>
+                    <h3>Datos del Pedido</h3>
+
+                    <form role="form" enctype="multipart/form-data" action="" method="POST" novalidate>
+                        {% csrf_token %}
+                        <table>
+                            {{ form.as_p }}
+
+                        </table>
+                        <br>
+                        <input class="btn btn-warning" type="submit" value="Actualizar">
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+{%endblock%}

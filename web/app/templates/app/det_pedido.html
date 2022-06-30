@@ -1,0 +1,77 @@
+{% extends 'app/base.html' %}
+
+{%load static%}
+
+{%block title%}
+<title>Orden pedido</title>
+{%endblock%}
+
+{% block content %}
+
+
+<div class="container mt-5">
+    <div class="p-5 mb-4 bg-light rounded-3 shadow-lg">
+
+        {% if user.is_authenticated %}
+
+        <div class="row featurette">
+            <div class="order-md-2 text-start">
+                <h1 class="display-5 fw-bold">Número de orden: {{pk}}</h1>
+
+                <div class="list-group">
+                    {%for d in detalleventa%}
+                    <a href="{% url 'detail'  pk=d.producto_id.idProducto %}"
+                        class="list-group-item list-group-item-action" aria-current="true">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <img src="{{d.producto_id.foto.url}}" class="rounded mx-auto d-block" alt="..."
+                                    style="height: 80px;">
+
+                            </div>
+                            <div class="col-md-8">
+                                <div class="d-flex w-100 justify-content-between">
+
+                                    <h5 class="mb-1">{{d.producto_id.nombreProducto}}</h5>
+                                </div>
+                                <p class="mb-1">Cantidad {{d.cantidad}}</p>
+                            </div>
+                        </div>
+                    </a>
+                    {%endfor%}
+                </div>
+
+
+
+
+
+                <br>
+                <div>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{% url 'mis_pedidos' %}" class="btn btn-secondary me-md-2" type="button">Volver</a>
+
+                    </div>
+
+                </div>
+
+
+
+
+                {%else%}
+                <h1 class="display-5 fw-bold">Carrito no disponible</h1>
+                <p class="col-md-8 fs-4">
+                    Debes iniciar sesión para poder visualizar el carrito.
+                </p>
+
+                <a class="btn btn-dark btn-lg" aria-current="page" href="{% url 'logear' %}">Iniciar sesión
+                    &nbsp;<img src="{% static 'app/img/ico/person.svg'%}" alt="" width="24" height="24"
+                        class="d-inline-block align-text-top" style="color: azure;">
+                </a>
+
+                {%endif%}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{%endblock%}

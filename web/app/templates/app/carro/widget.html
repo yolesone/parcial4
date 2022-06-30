@@ -1,0 +1,65 @@
+{% if user.is_authenticated %}
+
+<table class="table text-color-wh">
+
+    <thead>
+
+        <tr>
+            <th colspan="3" class="text-center">
+                Lista de productos
+            </th>
+        </tr>
+
+        <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Total</th>
+        </tr>
+
+
+    </thead>
+
+    <tbody>
+
+        {% if request.session.carro.items %}
+
+        {% for key, value in request.session.carro.items %}
+        <tr class="">
+            <td>{{value.nombreProducto}}</td>
+            <td>
+                <a href="{% url 'carro:agregar' value.idProducto %}" class="btn  rounded-pill btn-sm btn-success">+</a>
+                {{value.cantidad}}
+                <a href="{% url 'carro:restar' value.idProducto %}" class="btn rounded-pill btn-sm btn-success">-</a>
+            </td>
+            <td>
+                ${{value.precio}}
+            </td>
+        </tr>
+        {%endfor%}
+        {%else%}
+        <tr>
+            <td colspan="3">
+                <div class="alert alert-danger text-center">
+                    Sin productos
+                </div>
+            </td>
+        </tr>
+
+        {%endif%}
+        <tr>
+            <th colspan="3" class="text-center">
+                Subtotal: $ {{importe_total_carro}}
+            </th>
+        </tr>
+
+
+    </tbody>
+
+
+
+
+</table>
+
+{% else %}
+Debe iniciar sesión para ver el carrito
+{%endif%}

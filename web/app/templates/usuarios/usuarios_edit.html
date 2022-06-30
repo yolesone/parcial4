@@ -1,0 +1,25 @@
+{% extends 'app/mantenedor.html' %}
+{%load static%}
+{%block mantenedor%}
+
+<br>
+<div class="card shadow">
+    <div class="card-body">
+        <form role="form" enctype="multipart/form-data" action="" method="POST" novalidate>
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+                <input type="hidden" name="id_persona" value="{{form.id_persona}}">
+            </table>
+
+            <div class="d-grid gap-2 d-md-block">
+                <a href="{% url 'usuarios'%}" class="btn btn-secondary m-2">Volver</a>
+                <input class="btn btn-warning" type="submit" value="Actualizar">
+            </div>
+
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}
